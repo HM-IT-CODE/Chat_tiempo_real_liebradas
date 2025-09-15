@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    image: admin-financiero-api:latest
+    container_name: admin-financiero-api
+    env_file: .env
+    environment:
+      # Permite override de variables de entrypoint
+      RUN_MIGRATIONS: "true"
+      RUN_SEED: "false"
+      # DATABASE_URL puede venir del host / archivo .env
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    # Dependencias: si tu base de datos está externa (SQL Server corporativo) no definimos acá
+    # networks: [default]
+# networks:
+#   default:
+#     name: admin-financiero-net
